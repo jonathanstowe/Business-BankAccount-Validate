@@ -16,14 +16,28 @@
 #*****************************************************************************
 #*                                                                           *
 #*      $Log: BankAccount.pm,v $
-#*      Revision 1.1  2002/04/25 10:00:17  tdcjs
-#*      Initial revision
+#*      Revision 1.2  2002/04/25 12:11:23  tdcjs
+#*      Small changes after made live
+#*
+#*      Revision 1.1.1.1  2002/04/25 10:00:17  tdcjs
+#*      Added a new module
 #*
 #*                                                                           *
 #*                                                                           *
 #*****************************************************************************
 
 package Netscal::BankAccount;
+
+
+BEGIN
+{
+   unless ( exists $INC{'FindBin.pm'} )
+   {
+       use FindBin;
+   }
+}
+
+use lib $FindBin::Bin;
 
 use vars qw(@ISA $VERSION @EXPORT);
 
@@ -32,7 +46,7 @@ require Exporter;
 
 @EXPORT = qw( check_acct );
 
-($VERSION) = q$Revision: 1.1 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 1.2 $ =~ /([\d.]+)/;
 
 use strict;
 

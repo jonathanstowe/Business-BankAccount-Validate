@@ -16,6 +16,9 @@
 #*****************************************************************************
 #*                                                                           *
 #*      $Log: BankAccount,v $
+#*      Revision 1.2  2002/04/25 12:11:24  tdcjs
+#*      Small changes after made live
+#*
 #*      Revision 1.1  2002/04/25 10:06:51  tdcjs
 #*      Added webservice stuff
 #*
@@ -24,7 +27,9 @@
 #*****************************************************************************
 
 use SOAP::Transport::HTTP; 
+use FindBin;
 
 SOAP::Transport::HTTP::CGI
-  -> dispatch_to('Netscal::BankAccount','Netscal::BankAccount::Config') 
-  -> handle ;
+  -> dispatch_to($FindBin::Bin,'Netscal::BankAccount',
+                               'Netscal::BankAccount::Config') 
+  -> handle() ;
