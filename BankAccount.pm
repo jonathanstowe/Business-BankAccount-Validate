@@ -16,6 +16,9 @@
 #*****************************************************************************
 #*                                                                           *
 #*      $Log: BankAccount.pm,v $
+#*      Revision 1.4  2002/05/22 15:40:17  tdcjs
+#*      Change on live server
+#*
 #*      Revision 1.3  2002/05/22 15:33:31  tdcjs
 #*      Fixed it so that non-matching sort-codes are not validated.
 #*
@@ -49,7 +52,7 @@ require Exporter;
 
 @EXPORT = qw( check_acct );
 
-($VERSION) = q$Revision: 1.3 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 1.4 $ =~ /([\d.]+)/;
 
 use strict;
 
@@ -196,6 +199,8 @@ sub check_acct
          }
          $last_exc = $exc;
       }
+
+      $ret = 1 unless $matches;
 
       $ret = 1 unless $matches
    }
