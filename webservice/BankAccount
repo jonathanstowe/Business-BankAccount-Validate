@@ -1,0 +1,30 @@
+#!/usr/bin/perl -w
+#*****************************************************************************
+#*                                                                           *
+#*                            Netscalibur UK                                 *
+#*                                                                           *
+#*                                                                           *
+#*****************************************************************************
+#*                                                                           *
+#*      PROGRAM     :  BankAccount                                           *
+#*                                                                           *
+#*      AUTHOR      :  JNS                                                   *
+#*                                                                           *
+#*      DESCRIPTION :  SOAP Proxy for Netscal::BankAccount                   *
+#*                                                                           *
+#*                                                                           *
+#*****************************************************************************
+#*                                                                           *
+#*      $Log: BankAccount,v $
+#*      Revision 1.1  2002/04/25 10:06:51  tdcjs
+#*      Added webservice stuff
+#*
+#*                                                                           *
+#*                                                                           *
+#*****************************************************************************
+
+use SOAP::Transport::HTTP; 
+
+SOAP::Transport::HTTP::CGI
+  -> dispatch_to('Netscal::BankAccount','Netscal::BankAccount::Config') 
+  -> handle ;
