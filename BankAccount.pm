@@ -16,6 +16,9 @@
 #*****************************************************************************
 #*                                                                           *
 #*      $Log: BankAccount.pm,v $
+#*      Revision 1.3  2002/05/22 15:33:31  tdcjs
+#*      Fixed it so that non-matching sort-codes are not validated.
+#*
 #*      Revision 1.2  2002/04/25 12:11:23  tdcjs
 #*      Small changes after made live
 #*
@@ -46,7 +49,7 @@ require Exporter;
 
 @EXPORT = qw( check_acct );
 
-($VERSION) = q$Revision: 1.2 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 1.3 $ =~ /([\d.]+)/;
 
 use strict;
 
@@ -142,8 +145,10 @@ sub check_acct
 
    if ( length $sort_code == 6 and length $acct_code == 8 )
    {
+      my $matches = 0;
       foreach my $rule ( find_sort_code($sort_code) )
       {
+         $matches++;
          my $exc = $rule->{except};
          my $method = $methods{$rule->{algorithm}}->{sub};
          my $base = $methods{$rule->{algorithm}}->{base};
@@ -192,6 +197,7 @@ sub check_acct
          $last_exc = $exc;
       }
 
+      $ret = 1 unless $matches
    }
 
    return $ret > 0 ? 1 : 0 ;

@@ -4,7 +4,8 @@ use strict;
 
 use SOAP::Lite 
   uri => 'urn:Netscal/BankAccount/',
-  proxy => 'http://localhost/cgi-bin/BankAccount';
+  proxy => 'http://localhost/cgi-bin/BankAccount',
+  'debug';
 
 
 use Test::More tests => 32;
