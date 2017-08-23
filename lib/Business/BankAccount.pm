@@ -1,38 +1,6 @@
 #!/usr/bin/perl -w
-#*****************************************************************************
-#*                                                                           *
-#*                            Netscalibur UK                                 *
-#*                                                                           *
-#*                                                                           *
-#*****************************************************************************
-#*                                                                           *
-#*      PROGRAM     :  Netscal::BankAccount                                  *
-#*                                                                           *
-#*      AUTHOR      :  JNS                                                   *
-#*                                                                           *
-#*      DESCRIPTION :  Check structural validity of a bank account           *
-#*                                                                           *
-#*                                                                           *
-#*****************************************************************************
-#*                                                                           *
-#*      $Log: BankAccount.pm,v $
-#*      Revision 1.4  2002/05/22 15:40:17  tdcjs
-#*      Change on live server
-#*
-#*      Revision 1.3  2002/05/22 15:33:31  tdcjs
-#*      Fixed it so that non-matching sort-codes are not validated.
-#*
-#*      Revision 1.2  2002/04/25 12:11:23  tdcjs
-#*      Small changes after made live
-#*
-#*      Revision 1.1.1.1  2002/04/25 10:00:17  tdcjs
-#*      Added a new module
-#*
-#*                                                                           *
-#*                                                                           *
-#*****************************************************************************
 
-package Netscal::BankAccount;
+package Business::BankAccount;
 
 
 BEGIN
@@ -56,10 +24,10 @@ require Exporter;
 
 use strict;
 
-use Netscal::BankAccount::Config;
+use Business::BankAccount::Config;
 
-my $valfile = $Netscal::BankAccount::Config::valfile;
-my $subsfile = $Netscal::BankAccount::Config::subsfile;
+my $valfile = $Business::BankAccount::Config::valfile;
+my $subsfile = $Business::BankAccount::Config::subsfile;
 
 my @weightings = qw(
                      weight_u
@@ -92,7 +60,7 @@ my %methods = (
                  MOD11 => { sub => \&mod_check, base => 11 },
                  DBLAL => { sub => \&double_alt_mod_check, base => 0 }
               );
-             
+
 open(VAL,$valfile) || die "Couldn't open $valfile - $!\n";
 
 while(<VAL>)
@@ -101,7 +69,7 @@ while(<VAL>)
 
    my %record ;
 
-   @record{@fields} = split ' '; 
+   @record{@fields} = split ' ';
 
    $record{except} ||= '';
 
@@ -136,7 +104,7 @@ close(SUBS);
                      );
 sub check_acct
 {
-   shift if $_[0] =~ /Netscal::BankAccount/;
+   shift if $_[0] =~ /Business::BankAccount/;
    my ( $sort_code, $acct_code ) = @_;
 
    my $ret = 0;
@@ -161,7 +129,7 @@ sub check_acct
                $ret++;
          }
          else
-         { 
+         {
              if ( $exc and $exc == 5 )
              {
                 if ( exists $subs{$sort_code} )
@@ -190,7 +158,7 @@ sub check_acct
                  }
                  else
                  {
-                   unless ( ($exc and ($exc >= 10 ) ) || (( $exc && $last_exc ) && ($last_exc == 2 && $exc == 9))) 
+                   unless ( ($exc and ($exc >= 10 ) ) || (( $exc && $last_exc ) && ($last_exc == 2 && $exc == 9)))
                    {
                       $ret-- ;
                    }
@@ -216,7 +184,7 @@ sub find_sort_code
 
     foreach my $record ( @valtable )
     {
-       if ( $sort_code >= $record->{start_sort} and 
+       if ( $sort_code >= $record->{start_sort} and
              $sort_code <= $record->{end_sort} )
        {
           push @records, $record;
@@ -319,7 +287,7 @@ sub mod_check
    {
       if ( $res <= 1 )
       {
-         $return_value = ( $res == 0 and substr($acct_no, 6,1) == 0 );         
+         $return_value = ( $res == 0 and substr($acct_no, 6,1) == 0 );
       }
       else
       {

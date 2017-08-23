@@ -1,6 +1,6 @@
 use Test::More tests => 33;
 
-use_ok('Netscal::BankAccount');
+use_ok('Business::BankAccount');
 
 while(<DATA>)
 {
