@@ -1,18 +1,13 @@
-Netscal::BankAccount
-====================
+# Business::BankAccount
 
-The README is used to introduce the module and provide instructions on
-how to install the module, any machine dependencies it may have (for
-example C compilers and installed libraries) and any other information
-that should be provided before the module is installed.
+## Description
 
-A README file is required for CPAN modules since CPAN extracts the
-README file from a module distribution so that people browsing the
-archive can use it get an idea of the modules uses. It is usually a
-good idea to provide version information here so that people can
-decide whether fixes for the module are worth downloading.
+This provides a mechanism to validate a UK bank account number / sort-code
+pair against the standard rules that were previously maintained by BACS and
+now by [Vocalink](https://www.vocalink.com/customer-support/modulus-checking/)
 
-INSTALLATION
+
+## Installation
 
 To install this module type the following:
 
@@ -21,10 +16,11 @@ To install this module type the following:
    make test
    make install
 
-DEPENDENCIES
+## Dependencies
 
 None.
 
-COPYRIGHT AND LICENCE
+# Copyright and Licence
 
-Copyright (C) 2002 Netscalibur
+Copyright © 2002 Netscalibur
+Copyright © 2004, 2017 Jonathan Stowe
